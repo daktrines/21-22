@@ -79,6 +79,8 @@ namespace _21
             Discharge.SelectedValue = Discharge.Items[p1.Discharge - 1];
             Factory.SelectedValue = Factory.Items[p1.Factory - 1];
         }
+
+        //получаем в комбобокс значения
         private void Discharge_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try

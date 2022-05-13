@@ -68,9 +68,7 @@ namespace _21
                 try
                 {
                     //Получаем текущую запись
-                    //Factory row = (Factory)DataGrid1.SelectedItems[0];
                     ListOfFactory row1 = (ListOfFactory)Factorytable.Items[indexRow];
-                    //Factory row = (Factory)DataGrid1.CurrentCell.Item;
                     //Удаляем запись
                     db.ListOfFactories.Remove(row1);
                     db.SaveChanges();
@@ -86,8 +84,6 @@ namespace _21
         {
             //Загружаем таблицу из БД
             db.ListOfFactories.Load();
-            //Загружаем таблицу в DataGrid без отслеживания изменений контекста 
-            //DataGrid1.ItemsSource = db.Factories.ToList();
             //Загружаем таблицу в DataGrid с отслеживанием изменения контекста 
             Factorytable.ItemsSource = db.ListOfFactories.Local.ToBindingList();
         }

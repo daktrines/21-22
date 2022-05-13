@@ -61,7 +61,6 @@ namespace _21
                "зарплата по цеху." +
                "\nЗадание 5.С помощью SQL - запроса вывести фамилии сотрудников, оклад которых выше" +
                "среднего оклада по предприятию. ", "Информация", MessageBoxButton.OK, MessageBoxImage.Question);
-
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
@@ -74,11 +73,8 @@ namespace _21
             //Загружаем таблицу из БД
             db.DirectoryOfEmployees.Load();
             db.TariffReferences.Load();
-            //Загружаем таблицу в DataGrid без отслеживания изменений контекста 
-            //DataGrid1.ItemsSource = db.Factories.ToList();
             //Загружаем таблицу в DataGrid с отслеживанием изменения контекста 
             DataGrid1.ItemsSource = db.ГлавнаяФорма();
-            
         }
 
         private void Tariff_Click(object sender, RoutedEventArgs e)

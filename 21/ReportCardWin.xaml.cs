@@ -72,9 +72,7 @@ namespace _21
                 try
                 {
                     //Получаем текущую запись
-                    //Factory row = (Factory)DataGrid1.SelectedItems[0];
                     ReportCard row2 = (ReportCard)ReportCardtable.Items[indexRow];
-                    //Factory row = (Factory)DataGrid1.CurrentCell.Item;
                     //Удаляем запись
                     db.ReportCards.Remove(row2);
                     db.SaveChanges();
@@ -90,10 +88,9 @@ namespace _21
         {
             //Загружаем таблицу из БД
             db.ReportCards.Load();
-            //Загружаем таблицу в DataGrid без отслеживания изменений контекста 
-            //DataGrid1.ItemsSource = db.Factories.ToList();
             //Загружаем таблицу в DataGrid с отслеживанием изменения контекста 
             ReportCardtable.ItemsSource = db.ReportCards.Local.ToBindingList();
+            //Подключаем другую таблицу к комбобокс
             ServiceNumberCB.ItemsSource = db.DirectoryOfEmployees.Local.ToBindingList();
         }
     }

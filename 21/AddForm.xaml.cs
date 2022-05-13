@@ -71,6 +71,7 @@ namespace _21
             Factory.ItemsSource = db.ListOfFactories.Local.ToBindingList();
         }
 
+        //Получаем в комбобокс значения
         private void Discharge_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
