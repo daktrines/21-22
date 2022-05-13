@@ -1,0 +1,27 @@
+﻿<Window x:Class="_21.ViewForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_21"
+        mc:Ignorable="d"
+        Title="ViewForm" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" >
+    <DockPanel >
+        <GroupBox Header="Запросы">
+            <StackPanel>
+                <RadioButton x:Name="sql1" Content="Список работников цеха" IsChecked="True" GroupName="1" Margin="3"/>
+                <RadioButton x:Name="sql2" Content="Кол-во работников в одном цехе" GroupName="1" Margin="3"/>
+                <RadioButton x:Name="sql2_2" Content="Изменение цеха у работника" GroupName="1" Margin="3"/>
+                <RadioButton x:Name="sql3" Content="Ведомость начислений зарплаты" GroupName="1" Margin="3"/>
+                <RadioButton x:Name="sql4" Content="Справка о средней зарплате сотрудников, работающих в одном цехе" GroupName="1" Margin="3"/>
+                <RadioButton x:Name="sql5" Content="Список фамилий сотрудников, оклад выше среднего оклада" GroupName="1" Margin="3"/>
+                <Label >Параметр</Label>
+                <TextBox x:Name="ID" Margin="3"/>
+                <Button Content="Определить" x:Name="Find" Margin="3" Click="Find_Click"/>
+                <Label >Параметр для изменения цеха (введите табельный номер сотрудника)</Label>
+                <TextBox x:Name="Number" Margin="3"/>
+            </StackPanel>
+        </GroupBox>
+        <DataGrid x:Name="Viewtable" IsReadOnly="True" Margin="3" MinWidth="200"/>
+    </DockPanel>
+</Window>

@@ -1,0 +1,414 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище Pr21Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DirectoryOfEmployees">
+          <Key>
+            <PropertyRef Name="ServiceNumber" />
+          </Key>
+          <Property Name="ServiceNumber" Type="int" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Discharge" Type="int" Nullable="false" />
+          <Property Name="Factory" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ListOfFactory">
+          <Key>
+            <PropertyRef Name="FactoryNumber" />
+          </Key>
+          <Property Name="FactoryNumber" Type="int" Nullable="false" />
+          <Property Name="FactoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReportCard">
+          <Key>
+            <PropertyRef Name="ServiceNumber" />
+            <PropertyRef Name="MonthNumber" />
+            <PropertyRef Name="Year" />
+          </Key>
+          <Property Name="ServiceNumber" Type="int" Nullable="false" />
+          <Property Name="TimeWorkedInHours" Type="int" />
+          <Property Name="MonthNumber" Type="int" Nullable="false" />
+          <Property Name="Year" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TariffReference">
+          <Key>
+            <PropertyRef Name="Discharge" />
+          </Key>
+          <Property Name="Discharge" Type="int" Nullable="false" />
+          <Property Name="Rate" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_DirectoryOfEmployees_ListOfFactory">
+          <End Role="ListOfFactory" Type="Self.ListOfFactory" Multiplicity="1" />
+          <End Role="DirectoryOfEmployees" Type="Self.DirectoryOfEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ListOfFactory">
+              <PropertyRef Name="FactoryNumber" />
+            </Principal>
+            <Dependent Role="DirectoryOfEmployees">
+              <PropertyRef Name="Factory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DirectoryOfEmployees_TariffReference">
+          <End Role="TariffReference" Type="Self.TariffReference" Multiplicity="1" />
+          <End Role="DirectoryOfEmployees" Type="Self.DirectoryOfEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TariffReference">
+              <PropertyRef Name="Discharge" />
+            </Principal>
+            <Dependent Role="DirectoryOfEmployees">
+              <PropertyRef Name="Discharge" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportCard_DirectoryOfEmployees1">
+          <End Role="DirectoryOfEmployees" Type="Self.DirectoryOfEmployees" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ReportCard" Type="Self.ReportCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DirectoryOfEmployees">
+              <PropertyRef Name="ServiceNumber" />
+            </Principal>
+            <Dependent Role="ReportCard">
+              <PropertyRef Name="ServiceNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="ГлавнаяФорма" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Задание1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Задание2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FactoryNumber" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Задание2_2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ServiceNumber" Type="int" Mode="In" />
+          <Parameter Name="Factory" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Задание3" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Задание4" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FactoryNumber" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Задание5" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="НовыйРаботник" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ServiceNumber" Type="int" Mode="In" />
+          <Parameter Name="Surname" Type="nvarchar" Mode="In" />
+          <Parameter Name="Discharge" Type="int" Mode="In" />
+          <Parameter Name="Factory" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="Хранилище Pr21ModelContainer">
+          <EntitySet Name="DirectoryOfEmployees" EntityType="Self.DirectoryOfEmployees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListOfFactory" EntityType="Self.ListOfFactory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportCard" EntityType="Self.ReportCard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TariffReference" EntityType="Self.TariffReference" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DirectoryOfEmployees_ListOfFactory" Association="Self.FK_DirectoryOfEmployees_ListOfFactory">
+            <End Role="ListOfFactory" EntitySet="ListOfFactory" />
+            <End Role="DirectoryOfEmployees" EntitySet="DirectoryOfEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DirectoryOfEmployees_TariffReference" Association="Self.FK_DirectoryOfEmployees_TariffReference">
+            <End Role="TariffReference" EntitySet="TariffReference" />
+            <End Role="DirectoryOfEmployees" EntitySet="DirectoryOfEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportCard_DirectoryOfEmployees1" Association="Self.FK_ReportCard_DirectoryOfEmployees1">
+            <End Role="DirectoryOfEmployees" EntitySet="DirectoryOfEmployees" />
+            <End Role="ReportCard" EntitySet="ReportCard" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Pr21Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DirectoryOfEmployee">
+          <Key>
+            <PropertyRef Name="ServiceNumber" />
+          </Key>
+          <Property Name="ServiceNumber" Type="Int32" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Discharge" Type="Int32" Nullable="false" />
+          <Property Name="Factory" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ListOfFactory" Relationship="Self.FK_DirectoryOfEmployees_ListOfFactory" FromRole="DirectoryOfEmployees" ToRole="ListOfFactory" />
+          <NavigationProperty Name="TariffReference" Relationship="Self.FK_DirectoryOfEmployees_TariffReference" FromRole="DirectoryOfEmployees" ToRole="TariffReference" />
+          <NavigationProperty Name="ReportCards" Relationship="Self.FK_ReportCard_DirectoryOfEmployees1" FromRole="DirectoryOfEmployees" ToRole="ReportCard" />
+        </EntityType>
+        <EntityType Name="ListOfFactory">
+          <Key>
+            <PropertyRef Name="FactoryNumber" />
+          </Key>
+          <Property Name="FactoryNumber" Type="Int32" Nullable="false" />
+          <Property Name="FactoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DirectoryOfEmployees" Relationship="Self.FK_DirectoryOfEmployees_ListOfFactory" FromRole="ListOfFactory" ToRole="DirectoryOfEmployees" />
+        </EntityType>
+        <EntityType Name="ReportCard">
+          <Key>
+            <PropertyRef Name="ServiceNumber" />
+            <PropertyRef Name="MonthNumber" />
+            <PropertyRef Name="Year" />
+          </Key>
+          <Property Name="ServiceNumber" Type="Int32" Nullable="false" />
+          <Property Name="TimeWorkedInHours" Type="Int32" />
+          <Property Name="MonthNumber" Type="Int32" Nullable="false" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DirectoryOfEmployee" Relationship="Self.FK_ReportCard_DirectoryOfEmployees1" FromRole="ReportCard" ToRole="DirectoryOfEmployees" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TariffReference">
+          <Key>
+            <PropertyRef Name="Discharge" />
+          </Key>
+          <Property Name="Discharge" Type="Int32" Nullable="false" />
+          <Property Name="Rate" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="DirectoryOfEmployees" Relationship="Self.FK_DirectoryOfEmployees_TariffReference" FromRole="TariffReference" ToRole="DirectoryOfEmployees" />
+        </EntityType>
+        <Association Name="FK_DirectoryOfEmployees_ListOfFactory">
+          <End Role="ListOfFactory" Type="Self.ListOfFactory" Multiplicity="1" />
+          <End Role="DirectoryOfEmployees" Type="Self.DirectoryOfEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ListOfFactory">
+              <PropertyRef Name="FactoryNumber" />
+            </Principal>
+            <Dependent Role="DirectoryOfEmployees">
+              <PropertyRef Name="Factory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DirectoryOfEmployees_TariffReference">
+          <End Role="TariffReference" Type="Self.TariffReference" Multiplicity="1" />
+          <End Role="DirectoryOfEmployees" Type="Self.DirectoryOfEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TariffReference">
+              <PropertyRef Name="Discharge" />
+            </Principal>
+            <Dependent Role="DirectoryOfEmployees">
+              <PropertyRef Name="Discharge" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportCard_DirectoryOfEmployees1">
+          <End Role="DirectoryOfEmployees" Type="Self.DirectoryOfEmployee" Multiplicity="1" />
+          <End Role="ReportCard" Type="Self.ReportCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DirectoryOfEmployees">
+              <PropertyRef Name="ServiceNumber" />
+            </Principal>
+            <Dependent Role="ReportCard">
+              <PropertyRef Name="ServiceNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Pr21Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DirectoryOfEmployees" EntityType="Self.DirectoryOfEmployee" />
+          <EntitySet Name="ListOfFactories" EntityType="Self.ListOfFactory" />
+          <EntitySet Name="ReportCards" EntityType="Self.ReportCard" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TariffReferences" EntityType="Self.TariffReference" />
+          <AssociationSet Name="FK_DirectoryOfEmployees_ListOfFactory" Association="Self.FK_DirectoryOfEmployees_ListOfFactory">
+            <End Role="ListOfFactory" EntitySet="ListOfFactories" />
+            <End Role="DirectoryOfEmployees" EntitySet="DirectoryOfEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DirectoryOfEmployees_TariffReference" Association="Self.FK_DirectoryOfEmployees_TariffReference">
+            <End Role="TariffReference" EntitySet="TariffReferences" />
+            <End Role="DirectoryOfEmployees" EntitySet="DirectoryOfEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportCard_DirectoryOfEmployees1" Association="Self.FK_ReportCard_DirectoryOfEmployees1">
+            <End Role="DirectoryOfEmployees" EntitySet="DirectoryOfEmployees" />
+            <End Role="ReportCard" EntitySet="ReportCards" />
+          </AssociationSet>
+          <FunctionImport Name="ГлавнаяФорма" ReturnType="Collection(Pr21Model.ГлавнаяФорма_Result)" />
+          <FunctionImport Name="НовыйРаботник">
+            <Parameter Name="ServiceNumber" Mode="In" Type="Int32" />
+            <Parameter Name="Surname" Mode="In" Type="String" />
+            <Parameter Name="Discharge" Mode="In" Type="Int32" />
+            <Parameter Name="Factory" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Задание3" ReturnType="Collection(Pr21Model.Задание3_Result)" />
+          <FunctionImport Name="Задание4" ReturnType="Collection(Pr21Model.Задание4_Result)">
+          <Parameter Name="FactoryNumber" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Задание5" ReturnType="Collection(String)">
+          </FunctionImport>
+          <FunctionImport Name="Задание1" ReturnType="Collection(Pr21Model.Задание1_Result)" />
+          <FunctionImport Name="Задание2" ReturnType="Collection(Pr21Model.Задание2_Result)">
+          <Parameter Name="FactoryNumber" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Задание2_2">
+            <Parameter Name="ServiceNumber" Mode="In" Type="Int32" />
+            <Parameter Name="Factory" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="ГлавнаяФорма_Result">
+          <Property Type="Int32" Name="ServiceNumber" Nullable="false" />
+          <Property Type="String" Name="Surname" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Factory" Nullable="false" />
+          <Property Type="Int32" Name="Discharge" Nullable="false" />
+          <Property Type="Decimal" Name="Rate" Nullable="false" Precision="18" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="Задание3_Result">
+          <Property Type="String" Name="Surname" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="ServiceNumber" Nullable="false" />
+          <Property Type="Int32" Name="MonthNumber" Nullable="false" />
+          <Property Type="Decimal" Name="Expr1" Nullable="true" Precision="22" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="Задание4_Result">
+          <Property Type="Int32" Name="FactoryNumber" Nullable="false" />
+          <Property Type="String" Name="FactoryName" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Expr1" Nullable="true" Precision="38" Scale="6" />
+        </ComplexType>
+        <ComplexType Name="Задание1_Result">
+          <Property Type="String" Name="FactoryName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Surname" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Discharge" Nullable="false" />
+          <Property Type="Decimal" Name="Rate" Nullable="false" Precision="18" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="Задание2_Result">
+          <Property Type="Int32" Name="Цех" Nullable="true" />
+          <Property Type="Int32" Name="КолвоСотрудников" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Pr21ModelContainer" CdmEntityContainer="Pr21Entities">
+          <EntitySetMapping Name="DirectoryOfEmployees">
+            <EntityTypeMapping TypeName="Pr21Model.DirectoryOfEmployee">
+              <MappingFragment StoreEntitySet="DirectoryOfEmployees">
+                <ScalarProperty Name="ServiceNumber" ColumnName="ServiceNumber" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Discharge" ColumnName="Discharge" />
+                <ScalarProperty Name="Factory" ColumnName="Factory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListOfFactories">
+            <EntityTypeMapping TypeName="Pr21Model.ListOfFactory">
+              <MappingFragment StoreEntitySet="ListOfFactory">
+                <ScalarProperty Name="FactoryNumber" ColumnName="FactoryNumber" />
+                <ScalarProperty Name="FactoryName" ColumnName="FactoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportCards">
+            <EntityTypeMapping TypeName="Pr21Model.ReportCard">
+              <MappingFragment StoreEntitySet="ReportCard">
+                <ScalarProperty Name="ServiceNumber" ColumnName="ServiceNumber" />
+                <ScalarProperty Name="TimeWorkedInHours" ColumnName="TimeWorkedInHours" />
+                <ScalarProperty Name="MonthNumber" ColumnName="MonthNumber" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Pr21Model.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TariffReferences">
+            <EntityTypeMapping TypeName="Pr21Model.TariffReference">
+              <MappingFragment StoreEntitySet="TariffReference">
+                <ScalarProperty Name="Discharge" ColumnName="Discharge" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ГлавнаяФорма" FunctionName="Хранилище Pr21Model.ГлавнаяФорма">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pr21Model.ГлавнаяФорма_Result">
+                <ScalarProperty Name="ServiceNumber" ColumnName="ServiceNumber" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Factory" ColumnName="Factory" />
+                <ScalarProperty Name="Discharge" ColumnName="Discharge" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="НовыйРаботник" FunctionName="Хранилище Pr21Model.НовыйРаботник" />
+          <FunctionImportMapping FunctionImportName="Задание3" FunctionName="Хранилище Pr21Model.Задание3">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pr21Model.Задание3_Result">
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="ServiceNumber" ColumnName="ServiceNumber" />
+                <ScalarProperty Name="MonthNumber" ColumnName="MonthNumber" />
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Задание4" FunctionName="Хранилище Pr21Model.Задание4">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pr21Model.Задание4_Result">
+                <ScalarProperty Name="FactoryNumber" ColumnName="FactoryNumber" />
+                <ScalarProperty Name="FactoryName" ColumnName="FactoryName" />
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Задание5" FunctionName="Хранилище Pr21Model.Задание5" />
+          <FunctionImportMapping FunctionImportName="Задание1" FunctionName="Хранилище Pr21Model.Задание1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pr21Model.Задание1_Result">
+                <ScalarProperty Name="FactoryName" ColumnName="FactoryName" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Discharge" ColumnName="Discharge" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Задание2" FunctionName="Хранилище Pr21Model.Задание2">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pr21Model.Задание2_Result">
+                <ScalarProperty Name="Цех" ColumnName="Цех" />
+                <ScalarProperty Name="КолвоСотрудников" ColumnName="КолвоСотрудников" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Задание2_2" FunctionName="Хранилище Pr21Model.Задание2_2" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

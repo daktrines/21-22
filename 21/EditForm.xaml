@@ -1,0 +1,33 @@
+﻿<Window x:Class="_21.EditForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_21"
+        mc:Ignorable="d"
+        Title="EditForm" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+    <DockPanel >
+        <GroupBox >
+            <StackPanel >
+                <Label >Табельный номер</Label>
+                <TextBox x:Name="ServiceNumber" IsReadOnly="True" Margin="3" />
+                <Label >Фамилия</Label>
+                <TextBox x:Name="Surname" Margin="3" />
+                <Label >Разряд рабочего</Label>
+                <ComboBox x:Name="Discharge" Margin="3" DisplayMemberPath="Discharge" SelectionChanged="Discharge_SelectionChanged" />
+                <Label >Цех</Label>
+                <ComboBox x:Name="Factory" Margin="3" DisplayMemberPath="FactoryName" />
+                <Button Content="Редактировать" IsDefault="True" Margin="3" Click="EditMain_Click"/>
+                <Button Content="Отмена" Margin="3" Click="CloseMain_Click" />
+            </StackPanel>
+        </GroupBox>
+        <GroupBox >
+            <DataGrid x:Name="EditTable" IsReadOnly="True" AutoGenerateColumns="False" MinWidth=" 150">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Разряд" Binding="{Binding Discharge}"/>
+                    <DataGridTextColumn Header="Тариф" Binding="{Binding Rate}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+    </DockPanel>
+</Window>

@@ -1,0 +1,27 @@
+﻿<Window x:Class="_21.Tariff"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_21"
+        mc:Ignorable="d"
+        Title="Tariff" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+    <DockPanel>
+        <GroupBox Header="Команды" MinWidth="100" >
+            <StackPanel >
+                <Label >Разряд</Label>
+                <TextBox x:Name="Discharge" Margin="3" />
+                <Label >Тариф</Label>
+                <TextBox x:Name="Rate" Margin="3" />
+                <Button x:Name="AddTariff" Content="Добавить" Margin="3" Click="AddTariff_Click"/>
+                <Button x:Name="DeleteTariff" Content="Удалить" Margin="3" Click="DeleteTariff_Click" />
+            </StackPanel>
+        </GroupBox>
+        <DataGrid x:Name="Tarifftable" IsReadOnly="True" AutoGenerateColumns="False" Margin="3" MinWidth="200">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Разряд" Binding="{Binding Discharge}"/>
+                <DataGridTextColumn Header="Тариф" Binding="{Binding Rate}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</Window>
