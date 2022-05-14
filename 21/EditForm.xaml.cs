@@ -85,6 +85,7 @@ namespace _21
         {
             try
             {
+                //получаем список разрядов из таблицы тарифов, и потом используем выборку по разряду
                 EditTable.ItemsSource = db.TariffReferences.Local.ToBindingList().Where(p => p.Discharge == ((TariffReference)Discharge.SelectedValue).Discharge);
             }
             catch (Exception ex)

@@ -104,5 +104,28 @@ namespace _21
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Задание2_2", serviceNumberParameter, factoryParameter);
         }
+    
+        public virtual ObjectResult<Задание5__Result> Задание5_()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Задание5__Result>("Задание5_");
+        }
+    
+        public virtual int Задание22(Nullable<int> serviceNumber, Nullable<int> factory)
+        {
+            var serviceNumberParameter = serviceNumber.HasValue ?
+                new ObjectParameter("ServiceNumber", serviceNumber) :
+                new ObjectParameter("ServiceNumber", typeof(int));
+    
+            var factoryParameter = factory.HasValue ?
+                new ObjectParameter("Factory", factory) :
+                new ObjectParameter("Factory", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Задание22", serviceNumberParameter, factoryParameter);
+        }
+    
+        public virtual ObjectResult<Задание3Измененное_Result> Задание3Измененное()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Задание3Измененное_Result>("Задание3Измененное");
+        }
     }
 }

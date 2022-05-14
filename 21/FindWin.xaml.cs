@@ -27,6 +27,7 @@ namespace _21
         }
         private void FindForm_Click(object sender, RoutedEventArgs e)
         {
+            //Получаем поиск записи
             q = db.ГлавнаяФорма().ToList().Where(p => p.Surname == Find.Text);
             DialogResult = true;
             Close();

@@ -118,7 +118,13 @@
     <Compile Include="Задание3_Result.cs">
       <DependentUpon>ModelDataBase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Задание3Измененное_Result.cs">
+      <DependentUpon>ModelDataBase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Задание4_Result.cs">
+      <DependentUpon>ModelDataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Задание5__Result.cs">
       <DependentUpon>ModelDataBase.tt</DependentUpon>
     </Compile>
     <Page Include="EditForm.xaml">

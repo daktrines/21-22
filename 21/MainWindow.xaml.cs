@@ -105,7 +105,9 @@ namespace _21
         {
             //DataGrid1 .ItemsSource = новыйРаботник
             AddForm add = new AddForm();
-            add.Show();
+            add.ShowDialog();
+            DataGrid1.ItemsSource = db.ГлавнаяФорма();
+
         }
 
         private void Edit_Click(object sender, RoutedEventArgs e)
@@ -113,13 +115,16 @@ namespace _21
             int indexRow = DataGrid1.SelectedIndex;
             if (indexRow != -1)
             {
+                //Загружаем таблицу из БД
+                db.DirectoryOfEmployees.Load();
+                db.TariffReferences.Load();
                 //Получаем ключ текущей записи
                 DirectoryOfEmployee d = db.DirectoryOfEmployees.Local.ElementAt(indexRow);
                 //Открываем форму Редактировать
                 EditForm edit = new EditForm(d);
                 edit.ShowDialog();
                 //Обновляем таблицу
-                DataGrid1.Items.Refresh();
+                DataGrid1.ItemsSource = db.ГлавнаяФорма();
                 DataGrid1.Focus();
             }
         }
@@ -140,7 +145,7 @@ namespace _21
                     db.DirectoryOfEmployees.Remove(d);
                     db.SaveChanges();
                     //Обновляем таблицу
-                    DataGrid1.Items.Refresh();
+                    DataGrid1.ItemsSource = db.ГлавнаяФорма();
                 }
                 catch (ArgumentOutOfRangeException)
                 {

@@ -32,7 +32,7 @@ namespace _21
         {
             //Проверка каждого обязательного для заполнения поля
             StringBuilder errors = new StringBuilder();
-            if (ServiceNumber.Text.Length == 0 || double.TryParse(ServiceNumber.Text, out double x1) == false) errors.AppendLine("Введите табельный номер");
+            if (ServiceNumber.Text.Length == 0 || double.TryParse(ServiceNumber.Text, out double x1) == false || x1 <1 ) errors.AppendLine("Введите табельный номер");
             if (Surname.Text.Length == 0) errors.AppendLine("Введите фамилию");
             if (Discharge.Text.Length == 0 || double.TryParse(Discharge.Text, out double x2) == false) errors.AppendLine("Введите разряд");
             if (Factory.Text.Length == 0 ) errors.AppendLine("Введите цех");
@@ -76,7 +76,8 @@ namespace _21
         {
             try
             {
-                AddTable.ItemsSource = db.TariffReferences.Local.ToBindingList().Where(p => p.Discharge == ((TariffReference)Discharge.SelectedValue).Discharge);   
+                //получаем список разрядов из таблицы тарифов, и потом используем выборку по разряду
+                AddTable.ItemsSource = db.TariffReferences.Local.ToBindingList().Where(p => p.Discharge == ((TariffReference)Discharge.SelectedValue).Discharge);
             }
             catch (Exception ex)
             {

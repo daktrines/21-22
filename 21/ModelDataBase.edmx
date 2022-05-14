@@ -96,11 +96,11 @@
           <Parameter Name="ServiceNumber" Type="int" Mode="In" />
           <Parameter Name="Factory" Type="int" Mode="In" />
         </Function>
-        <Function Name="Задание3" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Задание3Измененное" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Задание4" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FactoryNumber" Type="int" Mode="In" />
         </Function>
-        <Function Name="Задание5" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Задание5_" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="НовыйРаботник" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ServiceNumber" Type="int" Mode="In" />
           <Parameter Name="Surname" Type="nvarchar" Mode="In" />
@@ -255,6 +255,12 @@
             <Parameter Name="ServiceNumber" Mode="In" Type="Int32" />
             <Parameter Name="Factory" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="Задание5_" ReturnType="Collection(Pr21Model.Задание5__Result)" />
+          <FunctionImport Name="Задание22">
+            <Parameter Name="ServiceNumber" Mode="In" Type="Int32" />
+            <Parameter Name="Factory" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Задание3Измененное" ReturnType="Collection(Pr21Model.Задание3Измененное_Result)" />
         </EntityContainer>
         <ComplexType Name="ГлавнаяФорма_Result">
           <Property Type="Int32" Name="ServiceNumber" Nullable="false" />
@@ -283,6 +289,16 @@
         <ComplexType Name="Задание2_Result">
           <Property Type="Int32" Name="Цех" Nullable="true" />
           <Property Type="Int32" Name="КолвоСотрудников" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Задание5__Result">
+          <Property Type="Int32" Name="ServiceNumber" Nullable="false" />
+          <Property Type="String" Name="Surname" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Задание3Измененное_Result">
+          <Property Type="Int32" Name="ServiceNumber" Nullable="false" />
+          <Property Type="String" Name="Surname" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="MonthNumber" Nullable="false" />
+          <Property Type="Decimal" Name="Exp1" Nullable="true" Precision="22" Scale="0" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -349,16 +365,6 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="НовыйРаботник" FunctionName="Хранилище Pr21Model.НовыйРаботник" />
-          <FunctionImportMapping FunctionImportName="Задание3" FunctionName="Хранилище Pr21Model.Задание3">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Pr21Model.Задание3_Result">
-                <ScalarProperty Name="Surname" ColumnName="Surname" />
-                <ScalarProperty Name="ServiceNumber" ColumnName="ServiceNumber" />
-                <ScalarProperty Name="MonthNumber" ColumnName="MonthNumber" />
-                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Задание4" FunctionName="Хранилище Pr21Model.Задание4">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Pr21Model.Задание4_Result">
@@ -368,7 +374,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Задание5" FunctionName="Хранилище Pr21Model.Задание5" />
           <FunctionImportMapping FunctionImportName="Задание1" FunctionName="Хранилище Pr21Model.Задание1">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Pr21Model.Задание1_Result">
@@ -388,6 +393,24 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Задание2_2" FunctionName="Хранилище Pr21Model.Задание2_2" />
+          <FunctionImportMapping FunctionImportName="Задание5_" FunctionName="Хранилище Pr21Model.Задание5_">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pr21Model.Задание5__Result">
+                <ScalarProperty Name="ServiceNumber" ColumnName="ServiceNumber" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Задание3Измененное" FunctionName="Хранилище Pr21Model.Задание3Измененное">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pr21Model.Задание3Измененное_Result">
+                <ScalarProperty Name="ServiceNumber" ColumnName="ServiceNumber" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="MonthNumber" ColumnName="MonthNumber" />
+                <ScalarProperty Name="Exp1" ColumnName="Exp1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
